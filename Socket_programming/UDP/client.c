@@ -7,12 +7,12 @@
 
 int main()
 {
-    char buff[100];
+    char a[100],b[100];
     int clientsocket,port; 
     struct sockaddr_in serveraddr; 
     socklen_t len;
     struct hostent *server; 
-    char message[50]; 
+    char message[100]; 
     
     clientsocket=socket(AF_INET,SOCK_DGRAM,0);
     
@@ -25,15 +25,24 @@ int main()
     serveraddr.sin_port=htons(port);
     fgets(message,2,stdin);
     printf("\nSending message for server connection\n");
-    
-    printf("\n enter the data to be send : ");
-    fgets(buff,100,stdin);
 
-    sendto(clientsocket,buff,sizeof(buff),0,(struct sockaddr*)&serveraddr,sizeof(serveraddr)); 
-    printf("\nReceiving message from server.\n");
-    
-    recvfrom(clientsocket,message,sizeof(message),0,(struct sockaddr*)&serveraddr,&len);
-    printf("\nMessage received:\t%s\n",message);
+    while(1){
+
+        printf("\n enter the 1st number to be send : ");
+        fgets(a,100,stdin);
+
+        sendto(clientsocket,a,sizeof(a),0,(struct sockaddr*)&serveraddr,sizeof(serveraddr)); 
+
+        printf("\n enter the 2nd number to be send : ");
+        fgets(b,100,stdin);
+
+        sendto(clientsocket,b,sizeof(b),0,(struct sockaddr*)&serveraddr,sizeof(serveraddr)); 
+
+        printf("\nReceiving message from server.\n");
+        recvfrom(clientsocket,message,sizeof(message),0,(struct sockaddr*)&serveraddr,&len);
+        printf("\nMessage received:\t%s\n",message);
+    }
+
     close(clientsocket);    
 }
 
