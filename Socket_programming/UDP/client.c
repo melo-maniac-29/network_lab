@@ -33,7 +33,7 @@ int main()
 
         sendto(clientsocket,a,sizeof(a),0,(struct sockaddr*)&serveraddr,sizeof(serveraddr)); 
 
-        printf("\n enter the 2nd number to be send : ");
+        printf("\nenter the 2nd number to be send : ");
         fgets(b,100,stdin);
 
         sendto(clientsocket,b,sizeof(b),0,(struct sockaddr*)&serveraddr,sizeof(serveraddr)); 
